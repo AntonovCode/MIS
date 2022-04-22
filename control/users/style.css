@@ -1,0 +1,111 @@
+@font-face {
+    font-family: "Commissioner-Medium";
+    src: url("/fonts/Commissioner/static/Commissioner-Medium.ttf");
+}
+
+.default-input {
+    padding: 10px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.content {
+    padding-top: 90px;
+    margin-left: 15%;
+    margin-right: 15%;
+    font-family: "Commissioner-Medium";
+}
+
+.new-user {
+    margin-bottom: 20px;
+}
+
+#status-message {
+    margin-left: 5px;
+    min-height: 20px;
+    opacity: 0;
+}
+
+.new-user__fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.new-user__fields input {
+    margin-left: 5px;
+}
+
+.new-user__btn {
+    display: block;
+    padding: 5px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: aquamarine;
+    cursor: pointer;
+}
+
+.new-user__btn:hover {
+    background-color: rgb(82, 255, 197);
+}
+
+.new-user__btn:active {
+    background-color: rgb(73, 226, 175);
+}
+
+.search__fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.search__fields input {
+    margin-left: 5px;
+}
+
+.user-table {
+	width: 100%;
+	border: none;
+    border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+.user-table th {
+	font-weight: bold;
+	text-align: left;
+	border: none;
+	padding: 10px 15px;
+	background: #d8d8d84c;
+	font-size: 14px;
+	border-left: 1px solid rgb(221, 221, 221);
+	border-right: 1px solid rgb(221, 221, 221);
+}
+
+.user-table td {
+	text-align: left;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	padding: 10px 15px;
+	font-size: 14px;
+	vertical-align: top;
+}
+
+.user-table tr th:first-child, .user-table tr td:first-child {
+	border-left: none;
+}
+
+.user-table th:last-child, .user-table td:last-child {
+	border-right: none;
+}
+
+.remove__btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: aquamarine;
+    cursor: pointer;
+}
