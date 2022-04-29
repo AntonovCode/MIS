@@ -33,7 +33,6 @@ $statement->bindValue(":surname",   $body["surname"],   PDO::PARAM_STR);
 $statement->bindValue(":firstname", $body["firstname"], PDO::PARAM_STR);
 $statement->bindValue(":lastname",  $body["lastname"],  PDO::PARAM_STR);
 $statement->bindValue(":username",  $body["username"],  PDO::PARAM_STR);
-$statement->bindValue(":username",  $body["username"],  PDO::PARAM_STR);
 $statement->bindValue(":password",  sha1($body["password"]), PDO::PARAM_STR);
 
 $response = [

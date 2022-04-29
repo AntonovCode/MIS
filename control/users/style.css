@@ -58,15 +58,6 @@
     background-color: rgb(73, 226, 175);
 }
 
-.search__fields {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.search__fields input {
-    margin-left: 5px;
-}
-
 .user-table {
 	width: 100%;
 	border: none;
@@ -94,6 +85,10 @@
 	vertical-align: top;
 }
 
+.user-table tbody tr:hover {
+    background-color: #ddd;
+}
+
 .user-table tr th:first-child, .user-table tr td:first-child {
 	border-left: none;
 }
@@ -102,10 +97,99 @@
 	border-right: none;
 }
 
-.remove__btn {
-    padding: 5px 10px;
-    border: none;
+.context-menu {
+    display: none;
+    position: absolute;
+    z-index: 2;
+    padding: 5px;
+    background-color: rgb(240, 240, 240);
     border-radius: 10px;
+    box-shadow: 1px 1px 10px 0px rgba(213, 248, 255, 0.805);
+}
+
+.context-menu div {
+    display: flex;
+    align-items: center;
+    padding-right: 15px;
+}
+
+.context-menu div:hover {
+    color: rgb(0, 148, 255);
+    cursor: pointer;
+}
+
+.context-menu img {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+}
+
+.popup-fade {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(84, 84, 84, 0.5);
+}
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(220, 220, 220);
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: inset 1px 1px 10px 0px rgb(187, 187, 187);
+}
+
+.popup-buttons {
+    display: flex;
+}
+
+.popup-buttons button:nth-child(1) {
+    margin-right: 10px;
+}
+
+.popup-buttons button {
+    flex-grow: 1;
+}
+
+.btn-flat {
+    display: block;
+    height: 100%;
+    padding: 10px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
     background-color: aquamarine;
     cursor: pointer;
+}
+
+.btn-flat:hover {
+    background-color: rgb(82, 255, 197);
+}
+
+.btn-flat:active {
+    background-color: rgb(73, 226, 175);
+}
+
+.default-input-outline {
+    padding: 10px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    min-width: 250px;
+    border: none;
+    outline: none;
+    transition-property: box-shadow;
+    transition-duration: 0.4s;
+    box-shadow: inset 1px 1px 3px 0px rgba(145, 144, 144, 0.8);
+}
+
+.default-input-outline:focus {
+    outline: rgb(0, 148, 255) solid 2px;
+    box-shadow: 1px 1px 5px 0px rgba(60, 174, 255);
 }

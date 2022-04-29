@@ -1,5 +1,9 @@
+import { UserTableContextMenu } from "./UserTableContextMenu.js";
+
 const createBtn = document.getElementById("createBtn");
-const tbodyUserTable = document.querySelector(".user-table tbody");
+let contextMenu = new UserTableContextMenu(".user-table", ".context-menu", getAllUsers);
+let cancelChange = document.querySelector(".popup-fade button:nth-child(1)");
+let changeBtn = document.querySelector(".popup-fade button:nth-child(2)");
 
 createBtn.addEventListener("click", async function () {
     let fields = {};
@@ -40,29 +44,6 @@ createBtn.addEventListener("click", async function () {
     getAllUsers();
 });
 
-tbodyUserTable.addEventListener('click', async function (event) {
-    let element = event.target;
-    
-    if (element.tagName === 'BUTTON') {
-        let userId = element.getAttribute('data-userid');
-        let response = await fetch('/control/users/deleteUser.php', {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify({
-                'userId': userId
-            })
-        });
-        
-        if (response.ok) {
-            let tr = element.parentElement.parentElement;
-            tr.remove();
-        }
-    }
-});
-
-
 function clearStatusMessage() {
     let statusElem = document.getElementById("status-message");
     statusElem.innerText = "";
@@ -81,12 +62,63 @@ async function getAllUsers() {
     data.forEach(function (row) {
         let tr = document.createElement("tr");
         const fields = ["rn", "surname", "firstname", "lastname", "username"];
-        
+        tr.setAttribute("data-userid", row["id"]);
+
         fields.forEach(function (field) {
             let td = document.createElement("td");
             td.innerText = row[field];
+            
+            if (field !== "rn") {
+                td.setAttribute("data-field", field);
+            }
+
             tr.appendChild(td);
         });
         tbody.appendChild(tr);
     });
 }
+
+function clearPopup () {
+    let popupFade = document.querySelector(".popup-fade");
+    let popup = popupFade.querySelector(".popup");
+
+    popupFade.querySelector('input[name="surname"]').value = "";
+    popupFade.querySelector('input[name="firstname"]').value = "";
+    popupFade.querySelector('input[name="lastname"]').value = "";
+    popupFade.querySelector('input[name="username"]').value = "";
+
+    popup.removeAttribute("data-userid");
+    popupFade.style.display = "none";
+}
+
+cancelChange.addEventListener("click", clearPopup);
+
+changeBtn.addEventListener("click", async function () {
+    let popupFade = document.querySelector(".popup-fade");
+    let popup = popupFade.querySelector(".popup");
+    let surnameInput   = popupFade.querySelector('input[name="surname"]');
+    let firstnameInput = popupFade.querySelector('input[name="firstname"]');
+    let lastnameInput  = popupFade.querySelector('input[name="lastname"]');
+    let usernameInput  = popupFade.querySelector('input[name="username"]');
+
+    let data = {
+        "id": popup.getAttribute("data-userid"),
+        "newSurname": surnameInput.value,
+        "newFirstname": firstnameInput.value,
+        "newLastname": lastnameInput.value,
+        "newUsername": usernameInput.value
+    };
+
+    const response = await fetch("/control/users/updateUser.php", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    if (!response.ok) return;
+    let json = await response.json();
+    clearPopup();
+    getAllUsers();
+});
